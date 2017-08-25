@@ -15,8 +15,8 @@ func run() {
 	r := rect.New(0, 0, 1024, 768)
 	s := swarm.Random(100, r)
 	for f.Active() {
-		s.Update(func(b *boid.T) *boid.T {
-			return b.Moved(mover.Next(b, 1.0))
+		s = s.Update(func(b boid.T) boid.T {
+			return b.Move(mover.Next(b, 1.0))
 		})
 		s.Draw(f)
 		f.Update()

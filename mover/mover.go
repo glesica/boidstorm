@@ -14,9 +14,9 @@ type T interface {
 // TODO: Consider moving this to an "integrator" package
 // TODO: Do we want this to be a method on an injectable struct?
 // TODO: Should this return the vector to be added to the position instead? That way we could cap overall delta
-// TODO: What about just returning an updated version with a Moved method? Would this work without generics?
-// TODO: That would also suggest an Accelerated method the mechanics could use
-func Next(ind T, step float64) vector.T {
-	dv := ind.Velocity().Scale(step)
-	return ind.Position().Add(dv)
+// TODO: What about just returning an updated version with a Move method? Would this work without generics?
+// TODO: That would also suggest an Accelerate method the mechanics could use
+func Next(individual T, step float64) vector.T {
+	dv := individual.Velocity().Scale(step)
+	return individual.Position().Add(dv)
 }
