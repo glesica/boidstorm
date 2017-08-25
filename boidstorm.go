@@ -9,7 +9,7 @@ import (
 	"github.com/glesica/boidstorm/view"
 )
 
-// TODO: This method should move to the game.T type
+// TODO: This method should move to the mechanics.T type
 func run() {
 	f := view.NewIMDrawFrame(1024, 768)
 	r := rect.New(0, 0, 1024, 768)

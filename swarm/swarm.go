@@ -2,11 +2,9 @@ package swarm
 
 import (
 	"github.com/glesica/boidstorm/boid"
-	"github.com/glesica/boidstorm/geometry/circle"
 	"github.com/glesica/boidstorm/geometry/rect"
 	"github.com/glesica/boidstorm/geometry/vector"
 	"github.com/glesica/boidstorm/view"
-	"golang.org/x/image/colornames"
 	"math/rand"
 )
 
@@ -55,8 +53,7 @@ func (s *T) ForEach(callback func(b *boid.T)) {
 
 func (s *T) Draw(frame view.Frame) {
 	for _, b := range s.boids {
-		c := circle.New(b.Position().X(), b.Position().Y(), 10)
-		frame.Circle(c, view.DrawOpts{StrokeColor: colornames.Green})
+		b.Draw(frame)
 	}
 }
 

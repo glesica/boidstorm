@@ -1,4 +1,4 @@
-package game
+package mechanics
 
 import "github.com/glesica/boidstorm/swarm"
 
