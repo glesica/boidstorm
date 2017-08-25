@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/glesica/boidstorm/vector"
+	"github.com/glesica/boidstorm/geometry/vector"
 	"math"
 	"testing"
 )
@@ -14,7 +14,7 @@ func ExpectEqualFloats(t *testing.T, name string, actual, expected float64) {
 	}
 }
 
-func ExpectEqualVectors(t *testing.T, name string, actual, expected *vector.T) {
+func ExpectEqualVectors(t *testing.T, name string, actual, expected vector.T) {
 	ExpectEqualFloats(t, name+".X()", actual.X(), expected.X())
 	ExpectEqualFloats(t, name+".Y()", actual.Y(), expected.Y())
 }

@@ -1,23 +1,25 @@
 package main
 
 import (
-	"github.com/glesica/boidstorm/view"
 	"github.com/faiface/pixel/pixelgl"
-	"github.com/glesica/boidstorm/swarm"
 	"github.com/glesica/boidstorm/boid"
+	"github.com/glesica/boidstorm/geometry/rect"
 	"github.com/glesica/boidstorm/mover"
+	"github.com/glesica/boidstorm/swarm"
+	"github.com/glesica/boidstorm/view"
 )
 
 // TODO: This method should move to the game.T type
 func run() {
-	v := view.New(1024, 768)
-	s := swarm.Random(100, 0, 1024, 0, 768)
-	for !v.Window().Closed() {
+	f := view.NewIMDrawFrame(1024, 768)
+	r := rect.New(0, 0, 1024, 768)
+	s := swarm.Random(100, r)
+	for f.Active() {
 		s.Update(func(b *boid.T) *boid.T {
 			return b.Moved(mover.Next(b, 1.0))
 		})
-		v.Swarm(s)
-		v.Update()
+		s.Draw(f)
+		f.Update()
 	}
 }
 

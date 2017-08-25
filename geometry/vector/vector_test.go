@@ -1,8 +1,8 @@
 package vector_test
 
 import (
+	"github.com/glesica/boidstorm/geometry/vector"
 	"github.com/glesica/boidstorm/test"
-	"github.com/glesica/boidstorm/vector"
 	"math"
 	"testing"
 )

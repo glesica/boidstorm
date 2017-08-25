@@ -2,7 +2,11 @@ package swarm
 
 import (
 	"github.com/glesica/boidstorm/boid"
-	"github.com/glesica/boidstorm/vector"
+	"github.com/glesica/boidstorm/geometry/circle"
+	"github.com/glesica/boidstorm/geometry/rect"
+	"github.com/glesica/boidstorm/geometry/vector"
+	"github.com/glesica/boidstorm/view"
+	"golang.org/x/image/colornames"
 	"math/rand"
 )
 
@@ -15,17 +19,17 @@ func New() *T {
 	return &T{boids: make([]*boid.T, 0)}
 }
 
-func Random(size int, xMin, xMax, yMin, yMax float64) *T {
-	xOffset := xMin
-	xDelta := xMax - xMin
-	yOffset := yMin
-	yDelta := yMax - yMin
+func Random(size int, region rect.T) *T {
+	xOffset := region.LowerLeft().X()
+	xDelta := region.UpperRight().X() - region.LowerLeft().X()
+	yOffset := region.LowerLeft().Y()
+	yDelta := region.UpperRight().Y() - region.LowerLeft().Y()
 	s := New()
 	for i := 0; i < size; i++ {
-		x := rand.Float64() * xDelta + xOffset
-		y := rand.Float64() * yDelta + yOffset
+		x := rand.Float64()*xDelta + xOffset
+		y := rand.Float64()*yDelta + yOffset
 		b := boid.New(x, y)
-		a := vector.New(rand.Float64() * 2 - 1.0, rand.Float64() * 2 - 1.0)
+		a := vector.New(rand.Float64()*2-1.0, rand.Float64()*2-1.0)
 		s.Add(b.Accelerated(a))
 	}
 	return s
@@ -49,10 +53,17 @@ func (s *T) ForEach(callback func(b *boid.T)) {
 	}
 }
 
+func (s *T) Draw(frame view.Frame) {
+	for _, b := range s.boids {
+		c := circle.New(b.Position().X(), b.Position().Y(), 10)
+		frame.Circle(c, view.DrawOpts{StrokeColor: colornames.Green})
+	}
+}
+
 // Near returns a slice of the boids from this swarm that are within the
 // given distance of the given position.
 // TODO: We should store something like a k-D tree to make this faster
-func (s *T) Near(position *vector.T, distance float64) []*boid.T {
+func (s *T) Near(position vector.T, distance float64) []*boid.T {
 	near := make([]*boid.T, 0)
 	for _, b := range s.boids {
 		if position.Dist(b.Position()) <= distance {

@@ -30,6 +30,31 @@ Should the game be played in real time or should it pause occasionally to
 allow new deployments / orders? Should existing boids be allowed to receive
 new parameters? Alternatively, they could be recalled and then reprogrammed.
 
+The goal of the boid fleets might be to capture "planets" (megaboids?). Not
+sure how that would work. Maybe they "land" on the planet and are absorbed,
+once a certain number are absorbed the planet becomes captured? Should the
+number to capture be fixed, or should you be able to insulate your control
+by pumping more boids in? Can they just fly into the planet or is there some
+kind of landing process during which time they are vulnerable? Should defenders
+land if they are about to lose a planet? We probably want a parameter of some
+kind for whether or not, or how likely, a boid will land / capture if the
+act causes the boid to be lost. What about orbiting instead of landing? That
+way the orbiting boids can continue to defend? If only your boids are in orbit
+then the planet is yours?
+
+Maybe planets generate resources that let you produce more boids? Model those
+mechanics after Konquest maybe? Should planets be random or should there be
+"maps"? What about other obstacles? Maybe not, at least at first, because the
+behavior is random, too many possible weird cases.
+
+Possible boid parameters:
+
+  * Aggressiveness
+  * Capture / orbit affinity
+  * Defensiveness
+  * Adventurousness / willingness to scout (fog of war?)
+  * Cohesiveness (stick together or spread out)
+
 ## Design
 
 Boid movement is defined by a position and a velocity. At each simulation tick

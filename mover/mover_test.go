@@ -1,22 +1,22 @@
 package mover_test
 
 import (
+	"github.com/glesica/boidstorm/geometry/vector"
 	"github.com/glesica/boidstorm/mover"
 	"github.com/glesica/boidstorm/test"
-	"github.com/glesica/boidstorm/vector"
 	"testing"
 )
 
 type stubMover struct {
-	position *vector.T
-	velocity *vector.T
+	position vector.T
+	velocity vector.T
 }
 
-func (m *stubMover) Velocity() *vector.T {
+func (m *stubMover) Velocity() vector.T {
 	return m.velocity
 }
 
-func (m *stubMover) Position() *vector.T {
+func (m *stubMover) Position() vector.T {
 	return m.position
 }
 
