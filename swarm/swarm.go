@@ -34,7 +34,7 @@ func Random(size int, region rect.T) T {
 	for i := 0; i < size; i++ {
 		x := rand.Float64()*xDelta + xOffset
 		y := rand.Float64()*yDelta + yOffset
-		b := boid.New(x, y)
+		b := boid.New(x, y, nil)
 		a := vector.New(rand.Float64()*2-1.0, rand.Float64()*2-1.0)
 		s = s.Add(b.Accelerate(a))
 	}

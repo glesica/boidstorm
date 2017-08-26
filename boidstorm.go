@@ -7,6 +7,7 @@ import (
 	"github.com/glesica/boidstorm/mover"
 	"github.com/glesica/boidstorm/swarm"
 	"github.com/glesica/boidstorm/view"
+	"github.com/glesica/boidstorm/mechanics/navigation"
 )
 
 // TODO: This method should move to the mechanics.T type
@@ -16,7 +17,7 @@ func run() {
 	s := swarm.Random(100, r)
 	for f.Active() {
 		s = s.Update(func(b boid.T) boid.T {
-			return b.Move(mover.Next(b, 1.0))
+			return navigation.UpdateBoid(s, b).Move(mover.Next(b, 1.0))
 		})
 		s.Draw(f)
 		f.Update()
