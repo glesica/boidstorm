@@ -4,6 +4,7 @@ import (
 	"github.com/glesica/boidstorm/geometry/circle"
 	"github.com/glesica/boidstorm/geometry/line"
 	"github.com/glesica/boidstorm/geometry/vector"
+	"github.com/glesica/boidstorm/mover"
 	"github.com/glesica/boidstorm/view"
 	"golang.org/x/image/colornames"
 )
@@ -21,9 +22,8 @@ type T interface {
 	Accelerate(velocity vector.T) T
 	Config() Config
 	Draw(frame view.Frame)
-	Move(position vector.T) T
+	Move(intergrator mover.Integrator, step float64) T
 	Position() vector.T
-	Rotate(angle float64) T
 	Velocity() vector.T
 }
 
@@ -39,6 +39,7 @@ func New(x, y float64, c Config) T {
 
 func (b *t) Accelerate(velocity vector.T) T {
 	return &t{
+		config:   b.config,
 		position: b.position,
 		velocity: b.velocity.Add(velocity),
 	}
@@ -56,22 +57,17 @@ func (b *t) Draw(frame view.Frame) {
 	frame.Circle(c, o)
 }
 
-func (b *t) Move(position vector.T) T {
+func (b *t) Move(integrator mover.Integrator, step float64) T {
+	newPosition := integrator(b, step)
 	return &t{
-		position: position,
+		config:   b.config,
+		position: newPosition,
 		velocity: b.velocity,
 	}
 }
 
 func (b *t) Position() vector.T {
 	return b.position
-}
-
-func (b *t) Rotate(angle float64) T {
-	return &t{
-		position: b.position,
-		velocity: b.velocity.Rotate(angle),
-	}
 }
 
 func (b *t) Velocity() vector.T {

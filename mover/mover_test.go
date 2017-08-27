@@ -21,11 +21,23 @@ func (m *stubMover) Position() vector.T {
 }
 
 func TestNext(t *testing.T) {
-	m0 := &stubMover{
-		position: vector.Zero(),
-		velocity: vector.New(1.0, 1.0),
-	}
-	p0 := mover.Next(m0, 0.5)
-	e0 := vector.New(0.5, 0.5)
-	test.ExpectEqualVectors(t, "Next(m0, 0.5)", p0, e0)
+	t.Run("Northeast", func(t *testing.T) {
+		m0 := &stubMover{
+			position: vector.Zero(),
+			velocity: vector.New(1.0, 1.0),
+		}
+		p0 := mover.Next(m0, 0.5)
+		e0 := vector.New(0.5, 0.5)
+		test.ExpectEqualVectors(t, "Next(m0, 0.5)", p0, e0)
+	})
+
+	t.Run("Southwest", func(t *testing.T) {
+		m0 := &stubMover{
+			position: vector.Zero(),
+			velocity: vector.New(-1.0, -1.0),
+		}
+		p0 := mover.Next(m0, 0.5)
+		e0 := vector.New(-0.5, -0.5)
+		test.ExpectEqualVectors(t, "Next(m0, 0.5)", p0, e0)
+	})
 }

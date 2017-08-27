@@ -25,7 +25,7 @@ func New() T {
 	return &t{boids: make([]boid.T, 0)}
 }
 
-func Random(size int, region rect.T) T {
+func Random(size int, region rect.T, config boid.Config) T {
 	xOffset := region.LowerLeft().X()
 	xDelta := region.UpperRight().X() - region.LowerLeft().X()
 	yOffset := region.LowerLeft().Y()
@@ -34,7 +34,7 @@ func Random(size int, region rect.T) T {
 	for i := 0; i < size; i++ {
 		x := rand.Float64()*xDelta + xOffset
 		y := rand.Float64()*yDelta + yOffset
-		b := boid.New(x, y, nil)
+		b := boid.New(x, y, config)
 		a := vector.New(rand.Float64()*2-1.0, rand.Float64()*2-1.0)
 		s = s.Add(b.Accelerate(a))
 	}

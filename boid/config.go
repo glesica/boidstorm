@@ -2,33 +2,34 @@ package boid
 
 type Config interface {
 	Avoidance() float64
+	Conformity() float64
+	SetAvoidance(value float64) Config
+	SetConformity(value float64) Config
 }
 
 type config struct {
-	avoidance float64
+	avoidance  float64
+	conformity float64
 }
 
-func (c *config) Avoidance() float64 {
+func NewConfig() Config {
+	return &config{}
+}
+
+func (c config) Avoidance() float64 {
 	return c.avoidance
 }
 
-type ConfigBuilder interface {
-	Avoidance(value float64) ConfigBuilder
+func (c config) Conformity() float64 {
+	return c.conformity
 }
 
-type configBuilder struct {
-	*config
+func (c config) SetAvoidance(value float64) Config {
+	c.avoidance = value
+	return c
 }
 
-func BuildConfig() ConfigBuilder {
-	return &configBuilder{
-		config: &config{
-			avoidance: 0.0,
-		},
-	}
-}
-
-func (b *configBuilder) Avoidance(value float64) ConfigBuilder {
-	b.avoidance = value
-	return b
+func (c config) SetConformity(value float64) Config {
+	c.conformity = value
+	return c
 }
