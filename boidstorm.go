@@ -4,10 +4,10 @@ import (
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/glesica/boidstorm/boid"
 	"github.com/glesica/boidstorm/geometry/rect"
+	"github.com/glesica/boidstorm/mechanics/navigation"
 	"github.com/glesica/boidstorm/mover"
 	"github.com/glesica/boidstorm/swarm"
 	"github.com/glesica/boidstorm/view"
-	"github.com/glesica/boidstorm/mechanics/navigation"
 )
 
 // TODO: This method should move to the mechanics.T type

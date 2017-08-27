@@ -17,6 +17,6 @@ func UpdateBoid(s swarm.T, b boid.T) boid.T {
 		positions[i] = neighbor.Position()
 	}
 	centroid := vector.Centroid(positions...)
-	b.Accelerate(b.Position().To(centroid).Scale(0.1))
-	return b.Accelerate(vector.New(0, 1).Scale(0.01))
+	return b.Accelerate(b.Position().To(centroid).Clamp(0.01))
+	//b.Accelerate(vector.New(0, 1).Scale(0.01))
 }

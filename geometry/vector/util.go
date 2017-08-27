@@ -1,7 +1,7 @@
 package vector
 
 // TODO: Should return an error in the case where the slice is empty
-func Centroid(vs... T) T {
+func Centroid(vs ...T) T {
 	count := len(vs)
 	xSum := 0.0
 	ySum := 0.0
