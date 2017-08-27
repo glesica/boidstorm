@@ -13,17 +13,24 @@ import (
 // may want to cheat for performance reasons later, in which case we can just
 // mutate and return.
 
-// TODO: Where do boid movement properties live?
-// We could just store a pointer to a configuration object since we'll
-// need to build user-generated configurations anyway. Where would that
-// struct live? Probably in the boid package?
-
 type T interface {
-	Accelerate(velocity vector.T) T
+	// Accelerate the boid along the given vector. The magnitude of the
+	// boid's total velocity will be clamped to respect its max speed.
+	Accelerate(acceleration vector.T) T
+
+	// Config returns the configuration for the target boid.
 	Config() Config
+
+	// Draw the target boid onto the given frame.
 	Draw(frame view.Frame)
+
+	// Move updates the target boid's position using the given integrator.
 	Move(intergrator mover.Integrator, step float64) T
+
+	// Position returns the target boid's current position.
 	Position() vector.T
+
+	// Velocity returns the target boid's current velocity.
 	Velocity() vector.T
 }
 
@@ -37,11 +44,11 @@ func New(x, y float64, c Config) T {
 	return &t{config: c, position: vector.New(x, y), velocity: vector.Zero()}
 }
 
-func (b *t) Accelerate(velocity vector.T) T {
+func (b *t) Accelerate(acceleration vector.T) T {
 	return &t{
 		config:   b.config,
 		position: b.position,
-		velocity: b.velocity.Add(velocity),
+		velocity: b.velocity.Add(acceleration).Clamp(b.config.MaxSpeed()),
 	}
 }
 
