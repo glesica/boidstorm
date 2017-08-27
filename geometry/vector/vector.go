@@ -84,10 +84,10 @@ func (v *t) AngleTo(other T) float64 {
 	a1 := other.Angle()
 
 	// TODO: This could probably be improved
-	if math.Abs(a1 - a0) <= math.Pi {
-		return math.Mod(a1 - a0, math.Pi)
+	if math.Abs(a1-a0) <= math.Pi {
+		return math.Mod(a1-a0, math.Pi)
 	} else {
-		return math.Mod(a0 - a1, math.Pi)
+		return math.Mod(a0-a1, math.Pi)
 	}
 }
 

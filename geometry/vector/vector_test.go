@@ -45,21 +45,21 @@ func TestT_Angle(t *testing.T) {
 
 func TestT_AngleTo(t *testing.T) {
 	v0 := vector.New(1, 1)
-	v1 := vector.New(-1,1)
-	v2 := vector.New(-1,-1)
-	v3 := vector.New(1,-1)
+	v1 := vector.New(-1, 1)
+	v2 := vector.New(-1, -1)
+	v3 := vector.New(1, -1)
 
-	test.ExpectEqualFloats(t, "v0.AngleTo(v1)", v0.AngleTo(v1), math.Pi / 2)
-	test.ExpectEqualFloats(t, "v0.AngleTo(v3)", v0.AngleTo(v3), -math.Pi / 2)
+	test.ExpectEqualFloats(t, "v0.AngleTo(v1)", v0.AngleTo(v1), math.Pi/2)
+	test.ExpectEqualFloats(t, "v0.AngleTo(v3)", v0.AngleTo(v3), -math.Pi/2)
 
-	test.ExpectEqualFloats(t, "v1.AngleTo(v2)", v1.AngleTo(v2), math.Pi / 2)
-	test.ExpectEqualFloats(t, "v1.AngleTo(v0)", v1.AngleTo(v0), -math.Pi / 2)
+	test.ExpectEqualFloats(t, "v1.AngleTo(v2)", v1.AngleTo(v2), math.Pi/2)
+	test.ExpectEqualFloats(t, "v1.AngleTo(v0)", v1.AngleTo(v0), -math.Pi/2)
 
-	test.ExpectEqualFloats(t, "v2.AngleTo(v3)", v2.AngleTo(v3), math.Pi / 2)
-	test.ExpectEqualFloats(t, "v2.AngleTo(v1)", v2.AngleTo(v1), -math.Pi / 2)
+	test.ExpectEqualFloats(t, "v2.AngleTo(v3)", v2.AngleTo(v3), math.Pi/2)
+	test.ExpectEqualFloats(t, "v2.AngleTo(v1)", v2.AngleTo(v1), -math.Pi/2)
 
-	test.ExpectEqualFloats(t, "v3.AngleTo(v0)", v3.AngleTo(v0), math.Pi / 2)
-	test.ExpectEqualFloats(t, "v3.AngleTo(v2)", v3.AngleTo(v2), -math.Pi / 2)
+	test.ExpectEqualFloats(t, "v3.AngleTo(v0)", v3.AngleTo(v0), math.Pi/2)
+	test.ExpectEqualFloats(t, "v3.AngleTo(v2)", v3.AngleTo(v2), -math.Pi/2)
 }
 
 func TestT_Dist(t *testing.T) {
