@@ -3,7 +3,7 @@ EXEDEST=/usr/bin
 
 GOC=go build
 
-.PHONY: build fmt get install precommit test uninstall vet
+.PHONY: build fmt get install precommit run test uninstall vet
 
 build:
 	${GOC}
@@ -18,6 +18,9 @@ install:
 	install ${PROJ} ${EXEDEST}/
 
 precommit: fmt vet test
+
+run: build
+	./${PROJ}
 
 test:
 	go test $$(go list ./... | grep -v /${PROJ}/vendor/)
