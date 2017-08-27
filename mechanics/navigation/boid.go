@@ -4,6 +4,7 @@ import (
 	"github.com/glesica/boidstorm/boid"
 	"github.com/glesica/boidstorm/geometry/vector"
 	"github.com/glesica/boidstorm/swarm"
+	"math/rand"
 )
 
 // TODO: Consider accelerating toward the centroid of the current and the group
@@ -34,6 +35,18 @@ func Boid(s swarm.T, b boid.T) boid.T {
 	// Conformity
 	conformity := b.Config().Conformity()
 	acceleration = acceleration.Add(velocityCentroid.Scale(conformity))
+
+	// Exploration
+	// TODO: This does nothing on average right now, need to reevaluate
+	exploration := b.Config().Exploration()
+	mag := b.Velocity().Magnitude()
+	xExplore := rand.NormFloat64() * mag
+	yExplore := rand.NormFloat64() * mag
+	acceleration = acceleration.Add(vector.New(xExplore, yExplore).Scale(exploration))
+
+	// Home - pulls the boid back to its "home" position
+	home := b.Config().Home()
+	acceleration = acceleration.Add(b.Position().To(home))
 
 	return b.Accelerate(acceleration.Clamp(0.01))
 }

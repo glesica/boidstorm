@@ -8,12 +8,13 @@ import (
 	"github.com/glesica/boidstorm/mover"
 	"github.com/glesica/boidstorm/swarm"
 	"github.com/glesica/boidstorm/view"
+	"github.com/glesica/boidstorm/geometry/vector"
 )
 
 func run() {
 	f := view.NewIMDrawFrame(1024, 768)
 	r := rect.New(0, 0, 1024, 768)
-	c := boid.NewConfig().SetConformity(0.5)
+	c := boid.NewConfig().SetAvoidance(0.5).SetHome(vector.New(1024 / 2, 768 / 2))
 	s := swarm.Random(100, r, c)
 	for f.Active() {
 		s = s.Update(func(b boid.T) boid.T {
