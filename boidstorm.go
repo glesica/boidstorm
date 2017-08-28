@@ -15,7 +15,7 @@ func run() {
 	f := view.NewIMDrawFrame(1024, 768)
 	r := rect.New(0, 0, 1024, 768)
 	h := vector.New(1024/2, 768/2)
-	c := boid.NewConfig().SetAvoidance(2.0).SetHome(0.1, h)
+	c := boid.NewConfig().SetAvoidance(2.0).SetHome(0.01, h)
 	s := swarm.Random(100, r, c)
 	for f.Active() {
 		s = s.Update(func(b boid.T) boid.T {

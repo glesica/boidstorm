@@ -45,10 +45,14 @@ func New(x, y float64, c Config) T {
 }
 
 func (b *t) Accelerate(acceleration vector.T) T {
+	newVelocity := b.velocity.RotateToward(
+		acceleration, 0.01).Add(
+		acceleration.Scale(0.5)).Clamp(b.config.MaxSpeed())
 	return &t{
 		config:   b.config,
 		position: b.position,
-		velocity: b.velocity.Add(acceleration).Clamp(b.config.MaxSpeed()),
+		//velocity: b.velocity.Add(acceleration).Clamp(b.config.MaxSpeed()),
+		velocity: newVelocity,
 	}
 }
 
@@ -58,7 +62,7 @@ func (b *t) Config() Config {
 
 func (b *t) Draw(frame view.Frame) {
 	c := circle.New(b.position.X(), b.position.Y(), 10)
-	l := line.New(b.position, b.position.Add(b.velocity.Scale(10)))
+	l := line.New(b.position, b.position.Add(b.velocity.Scale(5)))
 	o := view.DrawOpts{StrokeColor: colornames.Green, StrokeWidth: 1}
 	frame.Line(l, o)
 	frame.Circle(c, o)
