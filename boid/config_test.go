@@ -32,9 +32,12 @@ func TestConfig_Exploration(t *testing.T) {
 
 func TestConfig_MaxSpeed(t *testing.T) {
 	c0 := boid.NewConfig()
-	test.ExpectEqualFloats(t, "default MaxSpeed", c0.MaxSpeed(), boid.DefaultMaxSpeed)
+	test.ExpectEqualFloats(
+		t, "default MaxSpeed", c0.MaxSpeed(), boid.DefaultMaxSpeed)
 	c1 := c0.SetMaxSpeed(0.5)
 
-	test.ExpectEqualFloats(t, "c0.MaxSpeed()", c0.MaxSpeed(), 0.0)
-	test.ExpectEqualFloats(t, "c1.MaxSpeed()", c1.MaxSpeed(), 0.5)
+	test.ExpectEqualFloats(
+		t, "c0.MaxSpeed()", c0.MaxSpeed(), boid.DefaultMaxSpeed)
+	test.ExpectEqualFloats(
+		t, "c1.MaxSpeed()", c1.MaxSpeed(), 0.5)
 }
