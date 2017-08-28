@@ -35,7 +35,10 @@ func Random(size int, region rect.T, config boid.Config) T {
 		x := rand.Float64()*xDelta + xOffset
 		y := rand.Float64()*yDelta + yOffset
 		b := boid.New(x, y, config)
-		a := vector.New(rand.Float64()*2-1.0, rand.Float64()*2-1.0)
+		a := vector.New(
+			rand.Float64()*2*config.MaxSpeed()-config.MaxSpeed(),
+			rand.Float64()*2*config.MaxSpeed()-config.MaxSpeed(),
+		)
 		s = s.Add(b.Accelerate(a))
 	}
 	return s

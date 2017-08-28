@@ -2,7 +2,7 @@ package boid
 
 import "github.com/glesica/boidstorm/geometry/vector"
 
-const DefaultMaxSpeed = 1.0
+const DefaultMaxSpeed = 10.0
 
 type Config interface {
 	Avoidance() float64
@@ -10,28 +10,29 @@ type Config interface {
 	Exploration() float64
 
 	// TODO: Need to include a modifier as well as the position
-	Home() vector.T
+	Home() (float64, vector.T)
 	MaxSpeed() float64
 
 	SetAvoidance(value float64) Config
 	SetConformity(value float64) Config
 	SetExploration(value float64) Config
-	SetHome(value vector.T) Config
+	SetHome(value float64, location vector.T) Config
 	SetMaxSpeed(value float64) Config
 }
 
 type config struct {
-	avoidance  float64
-	conformity float64
-	exploration float64
-	home vector.T
-	maxSpeed float64
+	avoidance    float64
+	conformity   float64
+	exploration  float64
+	home         float64
+	homeLocation vector.T
+	maxSpeed     float64
 }
 
 func NewConfig() Config {
 	return &config{
-		home: vector.New(0, 0),
-		maxSpeed: DefaultMaxSpeed,
+		homeLocation: vector.New(0, 0),
+		maxSpeed:     DefaultMaxSpeed,
 	}
 }
 
@@ -47,8 +48,8 @@ func (c config) Exploration() float64 {
 	return c.exploration
 }
 
-func (c config) Home() vector.T {
-	return c.home
+func (c config) Home() (float64, vector.T) {
+	return c.home, c.homeLocation
 }
 
 func (c config) MaxSpeed() float64 {
@@ -70,8 +71,9 @@ func (c config) SetExploration(value float64) Config {
 	return c
 }
 
-func (c config) SetHome(value vector.T) Config {
+func (c config) SetHome(value float64, location vector.T) Config {
 	c.home = value
+	c.homeLocation = location
 	return c
 }
 

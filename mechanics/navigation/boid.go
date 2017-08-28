@@ -11,10 +11,7 @@ import (
 // This might moderate the corrections a bit automatically
 // TODO: Ideally we would weight the centroid calculation by distance from b
 func Boid(s swarm.T, b boid.T) boid.T {
-	neighbors := s.Neighbors(b, 1000)
-	if len(neighbors) == 0 {
-		return b
-	}
+	neighbors := s.Near(b.Position(), 50)
 
 	positions := make([]vector.T, len(neighbors))
 	velocities := make([]vector.T, len(neighbors))
@@ -45,8 +42,8 @@ func Boid(s swarm.T, b boid.T) boid.T {
 	acceleration = acceleration.Add(vector.New(xExplore, yExplore).Scale(exploration))
 
 	// Home - pulls the boid back to its "home" position
-	home := b.Config().Home()
-	acceleration = acceleration.Add(b.Position().To(home))
+	home, location := b.Config().Home()
+	acceleration = acceleration.Add(b.Position().To(location).Scale(home))
 
-	return b.Accelerate(acceleration.Clamp(0.01))
+	return b.Accelerate(acceleration.Clamp(0.1))
 }

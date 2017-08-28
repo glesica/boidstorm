@@ -58,7 +58,7 @@ func (b *t) Config() Config {
 
 func (b *t) Draw(frame view.Frame) {
 	c := circle.New(b.position.X(), b.position.Y(), 10)
-	l := line.New(b.position, b.position.Add(b.velocity.Scale(100)))
+	l := line.New(b.position, b.position.Add(b.velocity.Scale(10)))
 	o := view.DrawOpts{StrokeColor: colornames.Green, StrokeWidth: 1}
 	frame.Line(l, o)
 	frame.Circle(c, o)
