@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/glesica/boidstorm.svg?branch=master)](https://travis-ci.org/glesica/boidstorm)
+
 # Boid Storm
 
 A game of emergent behavior.
