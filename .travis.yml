@@ -3,5 +3,11 @@ language: go
 go:
   - 1.9.x
 
+addons:
+  apt:
+    packages:
+      - libgl1-mesa-dev
+      - xorg-dev
+
 script:
   - make test
