@@ -9,8 +9,9 @@ func init() {
 	Register(Avoidance)
 }
 
+// Avoidance pushes the individual further from its neighbors.
 func Avoidance(individual boid.T, neighbors []boid.T) vector.T {
 	weight := individual.Config().Avoidance()
 	centroid := PositionCentroid(neighbors)
-	return individual.Position().To(centroid).Scale(weight)
+	return individual.Position().To(centroid).Scale(-weight)
 }

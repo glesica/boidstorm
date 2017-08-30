@@ -5,6 +5,8 @@ import (
 	"github.com/glesica/boidstorm/geometry/vector"
 )
 
+// TODO: Ideally we would weight the centroid calculation by distance from b
+
 // PositionCentroid returns the centroid of the positions of the given
 // slice of boids.
 func PositionCentroid(boids []boid.T) vector.T {

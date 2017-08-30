@@ -8,31 +8,29 @@ type Config interface {
 	Avoidance() float64
 	Conformity() float64
 	Exploration() float64
-
-	// TODO: Need to include a modifier as well as the position
-	Home() (float64, vector.T)
 	MaxSpeed() float64
+	Wanderlust() (float64, vector.T)
 
 	SetAvoidance(value float64) Config
 	SetConformity(value float64) Config
 	SetExploration(value float64) Config
-	SetHome(value float64, location vector.T) Config
 	SetMaxSpeed(value float64) Config
+	SetWanderlust(value float64, home vector.T) Config
 }
 
 type config struct {
-	avoidance    float64
-	conformity   float64
-	exploration  float64
-	home         float64
-	homeLocation vector.T
-	maxSpeed     float64
+	avoidance   float64
+	conformity  float64
+	exploration float64
+	wanderlust  float64
+	home        vector.T
+	maxSpeed    float64
 }
 
 func NewConfig() Config {
 	return &config{
-		homeLocation: vector.New(0, 0),
-		maxSpeed:     DefaultMaxSpeed,
+		home:     vector.New(0, 0),
+		maxSpeed: DefaultMaxSpeed,
 	}
 }
 
@@ -48,8 +46,8 @@ func (c config) Exploration() float64 {
 	return c.exploration
 }
 
-func (c config) Home() (float64, vector.T) {
-	return c.home, c.homeLocation
+func (c config) Wanderlust() (float64, vector.T) {
+	return c.wanderlust, c.home
 }
 
 func (c config) MaxSpeed() float64 {
@@ -71,9 +69,9 @@ func (c config) SetExploration(value float64) Config {
 	return c
 }
 
-func (c config) SetHome(value float64, location vector.T) Config {
-	c.home = value
-	c.homeLocation = location
+func (c config) SetWanderlust(value float64, home vector.T) Config {
+	c.wanderlust = value
+	c.home = home
 	return c
 }
 

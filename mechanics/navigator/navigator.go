@@ -12,11 +12,15 @@ type Adjustment func(individual boid.T, neighbors []boid.T) vector.T
 
 var adjustments []Adjustment = make([]Adjustment, 0)
 
-// Adjustments returns the adjustments to be applied to all boids during
-// their navigation phase.
-// TODO: Want to make sure the slice isn't mutable, return a copy
-func Adjustments() []Adjustment {
-	return adjustments
+// Apply applies to registered adjustments to the given individual and
+// neighbors.
+// TODO: This is maybe where normalization should happen
+func Apply(individual boid.T, neighbors []boid.T) vector.T {
+	acceleration := vector.Zero()
+	for _, adjustment := range adjustments {
+		acceleration = acceleration.Add(adjustment(individual, neighbors))
+	}
+	return acceleration
 }
 
 // Register causes the given adjustment to be applied to all boids during
