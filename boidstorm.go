@@ -12,7 +12,7 @@ import (
 )
 
 func run() {
-	f := view.NewIMDrawFrame(1024, 768)
+	f := view.NewIMDrawCanvas(1024, 768)
 	r := rect.New(0, 0, 1024, 768)
 	h := vector.New(1024/2, 768/2)
 	c := boid.NewConfig().SetAvoidance(2.0).SetWanderlust(0.01, h)

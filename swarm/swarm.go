@@ -11,7 +11,7 @@ import (
 type T interface {
 	Add(newbie boid.T) T
 	ForEach(callback func(b boid.T))
-	Draw(frame view.Frame)
+	Draw(frame view.Canvas)
 	Near(position vector.T, distance float64) []boid.T
 	Neighbors(individual boid.T, distance float64) []boid.T
 	Update(callback func(b boid.T) boid.T) T
@@ -69,7 +69,7 @@ func (s *t) ForEach(callback func(b boid.T)) {
 	}
 }
 
-func (s *t) Draw(frame view.Frame) {
+func (s *t) Draw(frame view.Canvas) {
 	for _, b := range s.boids {
 		b.Draw(frame)
 	}

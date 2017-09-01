@@ -6,11 +6,20 @@ import (
 	"github.com/glesica/boidstorm/geometry/rect"
 )
 
-type Frame interface {
+type Canvas interface {
 	Active() bool
+
 	Circle(shape circle.T, opts DrawOpts)
+
 	Line(shape line.T, opts DrawOpts)
+
 	Rect(shape rect.T, opts DrawOpts)
+
+	// TODO: Child frame with offset origin / size
+	//SubFrame(bounds rect.T) Canvas
+
+	// TODO: Need a way to add and control text
 	//Text(center *vector.T, text string, opts DrawOpts)
+
 	Update()
 }
