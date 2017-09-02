@@ -1,5 +1,5 @@
 package view
 
 type Drawer interface {
-	Draw(frame Canvas)
+	Draw(canvas Canvas)
 }

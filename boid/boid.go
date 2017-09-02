@@ -21,8 +21,8 @@ type T interface {
 	// Config returns the configuration for the target boid.
 	Config() Config
 
-	// Draw the target boid onto the given frame.
-	Draw(frame view.Canvas)
+	// Draw the target boid onto the given canvas.
+	Draw(canvas view.Canvas)
 
 	// Move updates the target boid's position using the given integrator.
 	Move(intergrator mover.Integrator, step float64) T
@@ -60,12 +60,12 @@ func (b *t) Config() Config {
 	return b.config
 }
 
-func (b *t) Draw(frame view.Canvas) {
+func (b *t) Draw(canvas view.Canvas) {
 	c := circle.New(b.position.X(), b.position.Y(), 10)
 	l := line.New(b.position, b.position.Add(b.velocity.Scale(5)))
 	o := view.DrawOpts{StrokeColor: colornames.Green, StrokeWidth: 1}
-	frame.Line(l, o)
-	frame.Circle(c, o)
+	canvas.Line(l, o)
+	canvas.Circle(c, o)
 }
 
 func (b *t) Move(integrator mover.Integrator, step float64) T {

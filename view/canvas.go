@@ -21,5 +21,7 @@ type Canvas interface {
 	// TODO: Need a way to add and control text
 	//Text(center *vector.T, text string, opts DrawOpts)
 
+	Size() rect.T
+
 	Update()
 }

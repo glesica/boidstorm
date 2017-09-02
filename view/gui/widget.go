@@ -5,11 +5,18 @@ import (
 	"github.com/glesica/boidstorm/geometry/rect"
 )
 
-type Widget interface {
-	// Bounds returns the widget's bounding box.
-	// TODO: Use something more efficient for hit detection
-	Bounds() rect.T
+// Thoughts
+// The widget will always take the full canvas area it is given, or at
+// least as much of it as it wants to occupy. It will then be the
+// responsibility of the layout to figure out how much of the available
+// canvas to allocate to each widget. If the provided canvas is too
+// small for the widget to be drawn properly it should do the best it
+// can, possibly clipping itself, or even drawing an entirely different
+// version of itself.
 
-	// Draw allows the widget to be drawn on a frame.
-	Draw(frame view.Canvas)
+type Widget interface {
+	view.Drawer
+
+	MaxSize() rect.T
+	MinSize() rect.T
 }

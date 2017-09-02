@@ -58,6 +58,16 @@ func (f *imDrawCanvas) Rect(shape rect.T, opts DrawOpts) {
 	f.image.Reset()
 }
 
+func (f *imDrawCanvas) Size() rect.T {
+	bounds := f.window.Bounds()
+	return rect.New(
+		bounds.Min.X,
+		bounds.Min.Y,
+		bounds.Max.X,
+		bounds.Max.Y,
+	)
+}
+
 func (f *imDrawCanvas) Update() {
 	// TODO: Allow configurable background color
 	f.window.Clear(color.Black)
