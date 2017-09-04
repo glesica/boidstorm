@@ -4,6 +4,25 @@
 
 A game of emergent behavior.
 
+## Back Story
+
+In the future, the population has been so decimated by global war that the
+remaining factions can no longer afford to risk human lives in battle. Instead,
+sophisticated, semi-autonomous robots fight over territory and resources on
+behalf of human masters.
+
+The human commanders who control these legions of robotic terror do so from
+afar through computerized interfaces. They make split-second decisions about
+the number of robotic soldiers to deploy and how best to configure each group
+they send into battle.
+
+Poorly configured robots will fail to engage the enemy, fail to defend their
+own territory, and ultimately lose battles.
+
+The best commanders build libraries of strategies and configurations for rapid
+use in future battles. They also adapt to the tactics of their enemies,
+discarding obsolete ideas and dreaming up new ones.
+
 ## Ideas
 
 Each player deploys a limited supply of boids with varying behavioral parameters
