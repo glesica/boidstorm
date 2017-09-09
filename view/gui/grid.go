@@ -12,6 +12,10 @@ type gridLayout struct {
 	widgets []Widget
 }
 
+func (g *gridLayout) Count() int {
+	panic("implement me")
+}
+
 // func NewGridLayout(config GridLayoutConfig) Layout {
 func NewGridLayout() Layout {
 	return &gridLayout{
@@ -19,12 +23,13 @@ func NewGridLayout() Layout {
 	}
 }
 
-func (g *gridLayout) Draw(canvas view.Canvas) {
-	count := len(g.widgets)
-	// compute number of rows / columns (sqrt)
-	// draw each widget
-}
-
 func (g *gridLayout) Add(widget Widget) {
 	panic("implement me")
+}
+
+func (g *gridLayout) Draw(canvas view.Canvas) {
+	panic("implement me")
+	//count := len(g.widgets)
+	// compute number of rows / columns (sqrt)
+	// draw each widget
 }

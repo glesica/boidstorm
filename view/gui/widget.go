@@ -17,6 +17,11 @@ import (
 type Widget interface {
 	view.Drawer
 
+	//Active() bool
+
+	//Enabled() bool
+
 	MaxSize() rect.T
+
 	MinSize() rect.T
 }

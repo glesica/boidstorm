@@ -1,4 +1,4 @@
-package view
+package imdraw
 
 import (
 	"github.com/faiface/pixel"
@@ -8,7 +8,8 @@ import (
 	"github.com/glesica/boidstorm/geometry/line"
 	"github.com/glesica/boidstorm/geometry/rect"
 	"github.com/glesica/boidstorm/geometry/vector"
-	"image/color"
+	"github.com/glesica/boidstorm/view"
+	"golang.org/x/image/colornames"
 )
 
 type imDrawCanvas struct {
@@ -16,7 +17,7 @@ type imDrawCanvas struct {
 	window *pixelgl.Window
 }
 
-func NewIMDrawCanvas(width, height float64) Canvas {
+func NewIMDrawCanvas(width, height float64) view.Canvas {
 	cfg := pixelgl.WindowConfig{
 		Bounds: pixel.Rect{Min: pixel.V(0.0, 0.0), Max: pixel.V(width, height)},
 		VSync:  true,
@@ -37,25 +38,32 @@ func (f *imDrawCanvas) Active() bool {
 	return !f.window.Closed()
 }
 
-func (f *imDrawCanvas) Circle(shape circle.T, opts DrawOpts) {
+func (f *imDrawCanvas) Circle(shape circle.T, opts view.DrawOpts) {
 	f.image.Color = opts.StrokeColor
 	f.image.Push(pixelVec(shape.Center()))
 	f.image.Circle(shape.Radius(), opts.StrokeWidth)
 	f.image.Reset()
 }
 
-func (f *imDrawCanvas) Line(shape line.T, opts DrawOpts) {
+func (f *imDrawCanvas) Line(shape line.T, opts view.DrawOpts) {
 	f.image.Color = opts.StrokeColor
 	f.image.Push(pixelVec(shape.Start()), pixelVec(shape.End()))
 	f.image.Line(opts.StrokeWidth)
 	f.image.Reset()
 }
 
-func (f *imDrawCanvas) Rect(shape rect.T, opts DrawOpts) {
+func (f *imDrawCanvas) Rect(shape rect.T, opts view.DrawOpts) {
 	f.image.Color = opts.StrokeColor
 	f.image.Push(pixelVec(shape.LowerLeft()), pixelVec(shape.UpperLeft()), pixelVec(shape.UpperRight()), pixelVec(shape.LowerRight()))
 	f.image.Rectangle(opts.StrokeWidth)
 	f.image.Reset()
+}
+
+func (f *imDrawCanvas) Region(bounds rect.T) view.Canvas {
+	return &region{
+		bounds: bounds,
+		canvas: f,
+	}
 }
 
 func (f *imDrawCanvas) Size() rect.T {
@@ -70,7 +78,7 @@ func (f *imDrawCanvas) Size() rect.T {
 
 func (f *imDrawCanvas) Update() {
 	// TODO: Allow configurable background color
-	f.window.Clear(color.Black)
+	f.window.Clear(colornames.Lightgray)
 	f.image.Draw(f.window)
 	f.image = imdraw.New(nil)
 	f.window.Update()

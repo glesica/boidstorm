@@ -15,8 +15,7 @@ type Canvas interface {
 
 	Rect(shape rect.T, opts DrawOpts)
 
-	// TODO: Child frame with offset origin / size
-	//SubFrame(bounds rect.T) Canvas
+	Region(bounds rect.T) Canvas
 
 	// TODO: Need a way to add and control text
 	//Text(center *vector.T, text string, opts DrawOpts)

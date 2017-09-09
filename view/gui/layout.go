@@ -6,4 +6,6 @@ type Layout interface {
 	view.Drawer
 
 	Add(widget Widget)
+
+	Count() int
 }
